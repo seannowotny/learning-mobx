@@ -1,3 +1,5 @@
+// @flow
+
 import { action, computed, observable } from 'mobx';
 
 class IncomeDomainStore 
@@ -6,7 +8,7 @@ class IncomeDomainStore
 
    @observable IncomeBeforeTax = 0  
    
-   @action SetIncome (incomeAmount) 
+   @action SetIncome (incomeAmount: number) 
    {
      this.IncomeBeforeTax = parseInt(incomeAmount)
    }
@@ -29,4 +31,4 @@ class IncomeDomainStore
    };
  }
 
-export default IncomeDomainStore;
+export default new IncomeDomainStore();

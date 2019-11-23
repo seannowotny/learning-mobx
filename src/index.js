@@ -8,8 +8,8 @@ import IncomeUiStore from './stores/IncomeStore/IncomeUiStore';
 
 ReactDOM.render(
    <Provider 
-   IncomeDomainStore={new IncomeDomainStore()} 
-   IncomeUiStore={new IncomeUiStore()}
+   IncomeDomainStore={IncomeDomainStore}
+   IncomeUiStore={IncomeUiStore}
    >
       <App />
    </Provider>, 

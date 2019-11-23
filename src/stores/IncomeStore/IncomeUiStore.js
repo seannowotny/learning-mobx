@@ -1,3 +1,5 @@
+// @flow
+
 import { action, observable } from "mobx";
 
 class IncomeUiStore
@@ -15,4 +17,4 @@ class IncomeUiStore
    }
  }
  
- export default IncomeUiStore;
+ export default new IncomeUiStore();
