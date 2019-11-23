@@ -1,16 +1,44 @@
 import React from 'react';
 import './App.css';
-import TodoList from '../TodoList/TodoList';
-import TodoStore from '../../stores/TodoStore/TodoStore';
-import { Provider } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 
-function App() 
+const App = ({ IncomeDomainStore, IncomeUiStore }) =>
 {
+  // const { SetIncome, IncomeBeforeTax, CalculatedTaxPercentage } = IncomeDomainStore;
+  // const { ShouldShowCalculations, ShowCalculation } = IncomeUiStore;
+
+  const getCalculation = () =>
+  {
+    return IncomeUiStore.ShouldShowCalculations 
+    ? (
+        <div>
+          <p>Income: ${IncomeDomainStore.IncomeBeforeTax}.00</p>
+          <p>Tax percentage: {IncomeDomainStore.CalculatedTaxPercentage}%</p>
+          <p>Income after tax: {IncomeDomainStore.CalculatedIncomeAfterTax}</p>
+        </div>
+      )
+    : null;
+  };
+
   return (
-    <Provider store={TodoStore}>
-      <TodoList />
-    </Provider>
+    <div className="App">
+        <header className="App-header">
+          <input type="text" 
+          onChange={event => IncomeDomainStore.SetIncome(event.target.value)}
+          placeholder="Income" 
+          className="income-input"/>
+
+          <button type="button" 
+          onClick={() => IncomeUiStore.ShowCalculation()} 
+          className="calculate-btn"
+          >
+            Calculate
+          </button>
+
+          {getCalculation()}
+        </header>
+      </div>
   );
 }
 
-export default App;
+export default inject('IncomeDomainStore', 'IncomeUiStore')(observer(App));
