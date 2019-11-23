@@ -1,20 +1,23 @@
 // @flow
 
 import { action, observable } from "mobx";
+import { persist, create } from "mobx-persist";
 
 class IncomeUiStore
 {
-   constructor()
-   {
-      this.ShouldShowCalculations = false;
-   };
-
-   @observable ShouldShowCalculations = false;
+   @persist @observable ShouldShowCalculations = false;
    
    @action ShowCalculation() 
    {
       this.ShouldShowCalculations = true;
    }
  }
+
+ const hydrate = create({
+    storage: localStorage,
+    jsonify: true
+ });
  
- export default new IncomeUiStore();
+ const incomeUiStore = new IncomeUiStore();
+ export default incomeUiStore;
+ hydrate('incomeUiStore', incomeUiStore).then(() => console.log('incomeUiStore has been hydrated'));
