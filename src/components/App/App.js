@@ -1,14 +1,9 @@
-// @flow
 
 import * as React from 'react';
 import './App.css';
 import { observer, inject } from 'mobx-react';
-import IncomeDomainStore from '../../stores/IncomeStore/IncomeDomainStore';
-import IncomeUiStore from '../../stores/IncomeStore/IncomeUiStore';
 
-type PropTypes = { IncomeDomainStore: typeof(IncomeDomainStore), IncomeUiStore: typeof(IncomeUiStore) };
-
-const App = ({ IncomeDomainStore, IncomeUiStore }: PropTypes ): React.Node =>
+const App = ({ IncomeDomainStore, IncomeUiStore } ) =>
 {
   const getCalculation = () =>
   {

@@ -1,4 +1,3 @@
-// @flow
 
 import { action, observable } from "mobx";
 import { persist, create } from "mobx-persist";
