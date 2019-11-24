@@ -1,6 +1,6 @@
 
 import { action, observable } from "mobx";
-import { persist, create } from "mobx-persist";
+import { persist } from "mobx-persist";
 
 export default class IncomeUiStore
 {
@@ -10,11 +10,4 @@ export default class IncomeUiStore
    {
       this.ShouldShowCalculations = true;
    }
- }
-
- const hydrate = create({
-    storage: localStorage,
-    jsonify: true
- });
-
-//  hydrate('incomeUiStore', incomeUiStore).then(() => console.log('incomeUiStore has been hydrated'));
+}

@@ -5,11 +5,22 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'mobx-react';
 import IncomeDomainStore from './stores/IncomeStore/IncomeDomainStore';
 import IncomeUiStore from './stores/IncomeStore/IncomeUiStore';
+import { create } from "mobx-persist";
+
+const incomeDomainStore = new IncomeDomainStore();
+const incomeUiStore = new IncomeUiStore();
+
+const hydrate = create({
+   storage: localStorage,
+   jsonify: true
+});
+
+ hydrate('incomeUiStore', incomeUiStore).then(() => console.log('incomeUiStore has been hydrated'));
 
 ReactDOM.render(
    <Provider 
-   incomeDomainStore={new IncomeDomainStore()}
-   incomeUiStore={new IncomeUiStore()}
+   incomeDomainStore={incomeDomainStore}
+   incomeUiStore={incomeUiStore}
    >
       <App />
    </Provider>, 
