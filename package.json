@@ -137,11 +137,8 @@
   },
   "babel": {
     "presets": [
-      "react-app",
-      "mobx"
+      "react-app"
     ]
   },
-  "devDependencies": {
-    "babel-preset-mobx": "^2.0.0"
-  }
+  "devDependencies": {}
 }
