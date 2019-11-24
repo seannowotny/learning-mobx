@@ -7,7 +7,6 @@
     "@svgr/webpack": "4.3.2",
     "@types/jest": "^24.0.23",
     "@types/node": "^12.12.12",
-    "@types/react": "^16.9.13",
     "@types/react-dom": "^16.9.4",
     "@typescript-eslint/eslint-plugin": "^2.2.0",
     "@typescript-eslint/parser": "^2.2.0",
@@ -140,5 +139,7 @@
       "react-app"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/react": "^16.9.13"
+  }
 }

@@ -1,15 +1,16 @@
 
+import React from 'react';
 import { action, computed, observable } from 'mobx';
 
-class IncomeDomainStore 
+export default class IncomeDomainStore 
 {
    taxBracket = 20000;
 
    @observable IncomeBeforeTax = 0  
    
-   @action SetIncome (incomeAmount) 
+   @action SetIncome(incomeAmount: number)
    {
-     this.IncomeBeforeTax = parseInt(incomeAmount)
+     this.IncomeBeforeTax = incomeAmount;
    }
 
    @computed get CalculatedTaxPercentage () 
@@ -28,6 +29,4 @@ class IncomeDomainStore
          return this.IncomeBeforeTax * 0.8;
       }
    };
- }
-
-export default new IncomeDomainStore();
+}
