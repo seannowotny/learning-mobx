@@ -1,5 +1,6 @@
 // @flow
 
+import { createContext } from 'react';
 import { action, computed, observable } from 'mobx';
 
 class IncomeDomainStore 
@@ -31,4 +32,5 @@ class IncomeDomainStore
    };
  }
 
-export default new IncomeDomainStore();
+export const incomeDomainStore = new IncomeDomainStore();
+export const incomeDomainContext = createContext<IncomeDomainStore>(incomeDomainStore);

@@ -1,23 +1,25 @@
 // @flow
 
-import * as React from 'react';
+import React, { useContext } from 'react';
+import type { Node } from 'react';
 import './App.css';
-import { observer, inject } from 'mobx-react';
-import IncomeDomainStore from '../../stores/IncomeStore/IncomeDomainStore';
-import IncomeUiStore from '../../stores/IncomeStore/IncomeUiStore';
+import { incomeDomainContext } from '../../stores/IncomeStore/IncomeDomainStore';
+import { incomeUiContext } from '../../stores/IncomeStore/IncomeUiStore';
+import { observer } from 'mobx-react-lite';
 
-type PropTypes = { IncomeDomainStore: typeof(IncomeDomainStore), IncomeUiStore: typeof(IncomeUiStore) };
-
-const App = ({ IncomeDomainStore, IncomeUiStore }: PropTypes ): React.Node =>
+export default observer((): Node =>
 {
+  const incomeUiStore = useContext(incomeUiContext);
+  const incomeDomainStore = useContext(incomeDomainContext);
+
   const getCalculation = () =>
   {
-    return IncomeUiStore.ShouldShowCalculations 
+    return incomeUiStore.ShouldShowCalculations
     ? (
         <div>
-          <p>Income: ${IncomeDomainStore.IncomeBeforeTax}.00</p>
-          <p>Tax percentage: {IncomeDomainStore.CalculatedTaxPercentage}%</p>
-          <p>Income after tax: {IncomeDomainStore.CalculatedIncomeAfterTax}</p>
+          <p>Income: ${incomeDomainStore.IncomeBeforeTax}.00</p>
+          <p>Tax percentage: {incomeDomainStore.CalculatedTaxPercentage}%</p>
+          <p>Income after tax: {incomeDomainStore.CalculatedIncomeAfterTax}</p>
         </div>
       )
     : null;
@@ -27,12 +29,12 @@ const App = ({ IncomeDomainStore, IncomeUiStore }: PropTypes ): React.Node =>
     <div className="App">
       <header className="App-header">
         <input type="text" 
-        onChange={event => IncomeDomainStore.SetIncome(event.target.value)}
+        onChange={event => incomeDomainStore.SetIncome(event.target.value)}
         placeholder="Income" 
         className="income-input"/>
 
         <button type="button" 
-        onClick={() => IncomeUiStore.ShowCalculation()} 
+        onClick={() => incomeUiStore.ShowCalculation()} 
         className="calculate-btn"
         >
           Calculate
@@ -42,6 +44,4 @@ const App = ({ IncomeDomainStore, IncomeUiStore }: PropTypes ): React.Node =>
       </header>
     </div>
   );
-}
-
-export default inject('IncomeDomainStore', 'IncomeUiStore')(observer(App));
+});
